@@ -105,6 +105,31 @@ def convert_strings_to_datetimes(data, columns):
                 row[key] = [datetime.fromisoformat(item) for item in row[key]]
     return data
 
+# Function to postprocess row data for saving
+def postprocess_row_data(row_data, columns):
+    processed_data = []
+    for row in row_data:
+        processed_row = {}
+        for col in columns:
+            key = col['field']
+            col_type = col['type']
+            if col_type == "list_string" and isinstance(row[key], str):
+                processed_row[key] = row[key].split(",")
+            elif col_type == "list_date" and isinstance(row[key], str):
+                processed_row[key] = [datetime.fromisoformat(date) for date in row[key].split(",")]
+            elif col_type == "list_number" and isinstance(row[key], str):
+                processed_row[key] = list(map(float, row[key].split(",")))
+            elif col_type == "date" and isinstance(row[key], str):
+                processed_row[key] = datetime.fromisoformat(row[key])
+            elif col_type == "integer":
+                processed_row[key] = int(row[key])
+            elif col_type == "double":
+                processed_row[key] = float(row[key])
+            else:
+                processed_row[key] = row[key]
+        processed_data.append(processed_row)
+    return processed_data
+
 # Function to determine which columns originally contained lists and their types
 def get_columns(input_data):
     columns = []
@@ -209,3 +234,5 @@ create_table(input_data)
 # %%
 # Load the saved table data
 load_saved_table()
+
+# %%
