@@ -5,7 +5,6 @@ from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import dash_ag_grid as dag
 import json
-import os
 from datetime import datetime
 
 # Function to determine the type of column
@@ -87,6 +86,18 @@ def get_columns(input_data):
         columns.append(column_def)
     return columns
 
+# Function to convert datetime objects to strings for JSON serialization
+def convert_datetimes_for_json(data, columns):
+    for row in data:
+        for col in columns:
+            key = col['field']
+            col_type = col['type']
+            if col_type == "date":
+                row[key] = row[key].isoformat()
+            elif col_type == "list_date":
+                row[key] = [item.isoformat() for item in row[key]]
+    return data
+
 # Initialize the Dash app
 app = dash.Dash(__name__)
 
@@ -136,10 +147,8 @@ def create_table(input_data, saved_table_path="saved_table_data.json"):
             return rowData, rowData, "Save Table", ""
         
         elif 'save-table-button' in changed_id:
-            # Postprocess row data before saving
-            processed_row_data = postprocess_row_data(rowData, columnDefs)
             # Convert datetime objects to strings for JSON serialization
-            json_compatible_data = preprocess_input_data(processed_row_data, columnDefs)
+            json_compatible_data = convert_datetimes_for_json(rowData.copy(), columnDefs)
             # Save the JSON data to the specified file
             with open(saved_table_path, 'w') as f:
                 json.dump(json_compatible_data, f, indent=4)
