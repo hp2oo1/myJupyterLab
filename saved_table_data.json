@@ -3,7 +3,7 @@
         {
             "name": "Alice",
             "age": 30,
-            "birthday": "1993-05-17T14:30:00",
+            "birthday": "2024-05-30",
             "salary": 60000.0,
             "city": [
                 "New York",
@@ -17,7 +17,21 @@
         {
             "name": "Bob",
             "age": 25,
-            "birthday": "1998-08-24T09:15:00",
+            "birthday": "1998-08-24",
+            "salary": 50000.5,
+            "city": [
+                "San Francisco",
+                "Seattle"
+            ],
+            "meetings": [
+                "2023-05-30T16:00:00",
+                "2023-06-20T11:00:00"
+            ]
+        },
+        {
+            "name": "Bob",
+            "age": 25,
+            "birthday": "1998-08-24",
             "salary": 50000.5,
             "city": [
                 "San Francisco",
@@ -46,8 +60,7 @@
             "headerName": "birthday",
             "field": "birthday",
             "editable": true,
-            "type": "date",
-            "cellEditor": "agTextCellEditor"
+            "type": "dateString"
         },
         {
             "headerName": "salary",
@@ -65,7 +78,7 @@
             "headerName": "meetings",
             "field": "meetings",
             "editable": true,
-            "type": "list_date",
+            "type": "list_datetime",
             "cellEditor": "agTextCellEditor"
         }
     ]

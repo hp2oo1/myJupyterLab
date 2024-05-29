@@ -14,22 +14,6 @@
 # ---
 
 # %%
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:percent
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.2
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %%
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
@@ -44,11 +28,15 @@ def get_column_type(values):
             if all(isinstance(item, str) for item in value):
                 return "list_string"
             elif all(isinstance(item, datetime) for item in value):
-                return "list_date"
+                if all(item.time() == datetime.min.time() for item in value):
+                    return "list_date"
+                return "list_datetime"
             elif all(isinstance(item, (int, float)) for item in value):
                 return "list_number"
     if all(isinstance(value, datetime) for value in values):
-        return "date"
+        if all(value.time() == datetime.min.time() for value in values):
+            return "dateString"
+        return "datetime"
     if all(isinstance(value, int) for value in values):
         return "integer"
     if all(isinstance(value, float) for value in values):
@@ -66,10 +54,14 @@ def preprocess_input_data(input_data, columns):
             if col_type == "list_string" and isinstance(row[key], list):
                 processed_row[key] = ",".join(row[key])
             elif col_type == "list_date" and isinstance(row[key], list):
+                processed_row[key] = ",".join(item.strftime('%Y-%m-%d') for item in row[key])
+            elif col_type == "list_datetime" and isinstance(row[key], list):
                 processed_row[key] = ",".join(item.isoformat() for item in row[key])
             elif col_type == "list_number" and isinstance(row[key], list):
                 processed_row[key] = ",".join(map(str, row[key]))
-            elif col_type == "date" and isinstance(row[key], datetime):
+            elif col_type == "dateString" and isinstance(row[key], datetime):
+                processed_row[key] = row[key].strftime('%Y-%m-%d')
+            elif col_type == "datetime" and isinstance(row[key], datetime):
                 processed_row[key] = row[key].isoformat()
             else:
                 processed_row[key] = row[key]
@@ -84,9 +76,13 @@ def convert_datetimes_for_json(data, columns):
         for col in columns:
             key = col['field']
             col_type = col['type']
-            if col_type == "date" and isinstance(row[key], datetime):
+            if col_type == "dateString" and isinstance(row[key], datetime):
+                json_row[key] = row[key].strftime('%Y-%m-%d')
+            elif col_type == "datetime" and isinstance(row[key], datetime):
                 json_row[key] = row[key].isoformat()
             elif col_type == "list_date" and isinstance(row[key], list):
+                json_row[key] = [item.strftime('%Y-%m-%d') for item in row[key]]
+            elif col_type == "list_datetime" and isinstance(row[key], list):
                 json_row[key] = [item.isoformat() for item in row[key]]
             else:
                 json_row[key] = row[key]
@@ -99,9 +95,13 @@ def convert_strings_to_datetimes(data, columns):
         for col in columns:
             key = col['field']
             col_type = col['type']
-            if col_type == "date" and isinstance(row[key], str):
+            if col_type == "dateString" and isinstance(row[key], str):
+                row[key] = datetime.strptime(row[key], '%Y-%m-%d')
+            elif col_type == "datetime" and isinstance(row[key], str):
                 row[key] = datetime.fromisoformat(row[key])
             elif col_type == "list_date" and isinstance(row[key], list):
+                row[key] = [datetime.strptime(item, '%Y-%m-%d') for item in row[key]]
+            elif col_type == "list_datetime" and isinstance(row[key], list):
                 row[key] = [datetime.fromisoformat(item) for item in row[key]]
     return data
 
@@ -116,10 +116,14 @@ def postprocess_row_data(row_data, columns):
             if col_type == "list_string" and isinstance(row[key], str):
                 processed_row[key] = row[key].split(",")
             elif col_type == "list_date" and isinstance(row[key], str):
+                processed_row[key] = [datetime.strptime(date, '%Y-%m-%d') for date in row[key].split(",")]
+            elif col_type == "list_datetime" and isinstance(row[key], str):
                 processed_row[key] = [datetime.fromisoformat(date) for date in row[key].split(",")]
             elif col_type == "list_number" and isinstance(row[key], str):
                 processed_row[key] = list(map(float, row[key].split(",")))
-            elif col_type == "date" and isinstance(row[key], str):
+            elif col_type == "dateString" and isinstance(row[key], str):
+                processed_row[key] = datetime.strptime(row[key], '%Y-%m-%d')
+            elif col_type == "datetime" and isinstance(row[key], str):
                 processed_row[key] = datetime.fromisoformat(row[key])
             elif col_type == "integer":
                 processed_row[key] = int(row[key])
@@ -142,7 +146,7 @@ def get_columns(input_data):
             "editable": True,
             "type": col_type
         }
-        if col_type == "date" or col_type == "list_date":
+        if col_type in ["datetime", "list_date", "list_datetime"]:
             column_def["cellEditor"] = "agTextCellEditor"
         columns.append(column_def)
     return columns
@@ -207,6 +211,13 @@ def create_table(input_data, saved_table_path="saved_table_data.json"):
             return rowData, {'data': rowData, 'columns': columnDefs}, "Table Saved", f"Data saved to: {saved_table_path}"
         
         elif 'table' in changed_id and cell_value_changed:
+            # Update the stored data to reflect the cell value change
+            for row in rowData:
+                for col in columnDefs:
+                    key = col['field']
+                    col_type = col['type']
+                    if col_type == "dateString" and isinstance(row[key], datetime):
+                        row[key] = row[key].strftime('%Y-%m-%d')
             return rowData, {'data': rowData, 'columns': columnDefs}, "Save Table", ""
         
         return rowData, {'data': rowData, 'columns': columnDefs}, "Save Table", ""
@@ -224,8 +235,8 @@ def load_saved_table(saved_table_path="saved_table_data.json"):
 # %%
 # Sample input
 input_data = [
-    {"name": "Alice", "age": 30, "birthday": datetime(1993, 5, 17, 14, 30), "salary": 60000.00, "city": ["New York", "Los Angeles"], "meetings": [datetime(2023, 5, 28, 10, 0), datetime(2023, 6, 15, 14, 0)]},
-    {"name": "Bob", "age": 25, "birthday": datetime(1998, 8, 24, 9, 15), "salary": 50000.50, "city": ["San Francisco", "Seattle"], "meetings": [datetime(2023, 5, 30, 16, 0), datetime(2023, 6, 20, 11, 0)]}
+    {"name": "Alice", "age": 30, "birthday": datetime(1993, 5, 17), "salary": 60000.00, "city": ["New York", "Los Angeles"], "meetings": [datetime(2023, 5, 28, 10, 0), datetime(2023, 6, 15, 14, 0)]},
+    {"name": "Bob", "age": 25, "birthday": datetime(1998, 8, 24), "salary": 50000.50, "city": ["San Francisco", "Seattle"], "meetings": [datetime(2023, 5, 30, 16, 0), datetime(2023, 6, 20, 11, 0)]}
 ]
 
 # Create the table
@@ -233,6 +244,7 @@ create_table(input_data)
 
 # %%
 # Load the saved table data
-load_saved_table()
+saved_data = load_saved_table()
+print(saved_data)
 
 # %%
