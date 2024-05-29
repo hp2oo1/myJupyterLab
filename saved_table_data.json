@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Alice",
+        "age": 30,
+        "birthday": "1993-05-17T14:30:00",
+        "salary": 60000.0,
+        "city": "New York,Los Angeles",
+        "meetings": "2023-05-28T10:00:00,2023-06-15T14:00:00"
+    },
+    {
+        "name": "Bob",
+        "age": 25,
+        "birthday": "1998-08-24T09:15:00",
+        "salary": 50000.5,
+        "city": "San Francisco,Seattle",
+        "meetings": "2023-05-30T16:00:00,2023-06-20T11:00:00"
+    },
+    {
+        "name": "Bob",
+        "age": 25,
+        "birthday": "1998-08-24T09:15:00",
+        "salary": 50000.5,
+        "city": "San Francisco,Seattle",
+        "meetings": "2023-05-30T16:00:00,2023-06-20T11:00:00"
+    }
+]
