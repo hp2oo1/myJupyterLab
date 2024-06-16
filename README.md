@@ -3,6 +3,8 @@
 git clone --recursive https://github.com/hp2oo1/myJupyterLab
 ```
 
+Create and activate conda environment
+
 ```
 cd myJupyterLab
 conda install -c conda-forge nodejs
