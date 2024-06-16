@@ -49,6 +49,7 @@ cd jupyterLab
 jupyter lab build
 rm -rf ..\.conda\share\jupyter\lab\staging\node_modules\@lumino
 mklink /J ..\.conda\share\jupyter\lab\staging\node_modules\@lumino ..\lumino\packages
+jupyter lab build
 ```
 
 ### Launch JupyterLab
