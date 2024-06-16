@@ -7,7 +7,13 @@ Create and activate conda environment
 
 ```
 cd myJupyterLab
-conda install -c conda-forge nodejs=20 -y
+conda install -c conda-forge nodejs=20 yarn -y
+```
+
+### Build Lumino
+```
+cd lumino
+yarn && yarn build
 ```
 
 ### Install Development Version
@@ -20,12 +26,6 @@ pip install -ve ".[dev]"
 ```
 cd ipydatagrid
 pip install -ve .
-```
-
-### Build Lumino
-```
-cd lumino
-jlpm && jlpm build
 ```
 
 ### Rebuild JupyterLab
