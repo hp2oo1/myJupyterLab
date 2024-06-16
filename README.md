@@ -20,13 +20,13 @@ jlpm && jlpm build
 ```
 git clone https://github.com/hp2oo1/jupyterlab.git
 cd jupyterlab
-jlpm link ..\lumino
+jlpm link ..\lumino --all
 pip install -ve ".[dev]"
 ```
 
 ```
 cd ipydatagrid
-jlpm link ..\lumino
+jlpm link ..\lumino --all
 pip install -ve .
 ```
 
