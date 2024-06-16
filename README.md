@@ -22,7 +22,6 @@ git clone https://github.com/hp2oo1/jupyterlab.git
 cd jupyterlab
 yarn link ..\lumino
 pip install -ve ".[dev]"
-jupyter lab build
 ```
 
 ```
@@ -44,13 +43,15 @@ cd ipydatagrid
 jlpm && jlpm build
 ```
 
-### Launch JupyterLab
+### Before Launch JupyterLab
 ```
-cd myJupyterLab
-rm -rf .conda\share\jupyter\lab\staging\node_modules\@lumino
-mklink /J .conda\share\jupyter\lab\staging\node_modules\@lumino lumino\packages
+cd jupyterLab
+jupyter lab build
+rm -rf ..\.conda\share\jupyter\lab\staging\node_modules\@lumino
+mklink /J ..\.conda\share\jupyter\lab\staging\node_modules\@lumino ..\lumino\packages
 ```
 
+### Launch JupyterLab
 ```
 jupyter lab
 ```
