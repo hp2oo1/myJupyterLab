@@ -1,6 +1,9 @@
 ### MyJupyterLab
 ```
-git clone --recursive https://github.com/hp2oo1/my
+git clone --recursive https://github.com/hp2oo1/myJupyterLab
+```
+
+```
 cd myJupyterLab
 conda install -c conda-forge nodejs
 ```
