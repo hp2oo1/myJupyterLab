@@ -9,7 +9,12 @@ conda install -c conda-forge nodejs
 ```
 git clone https://github.com/hp2oo1/jupyterlab.git
 cd jupyterlab
-pip install -e ".[dev]"
+pip install -ve ".[dev]"
+```
+
+```
+cd ipydatagrid
+pip install -ve .
 ```
 
 ### Build Lumino
@@ -26,10 +31,9 @@ jlpm && jlpm build
 jupyter lab build
 ```
 
-### Build ipydatagrid
+### ReBuild ipydatagrid
 ```
 cd ipydatagrid
 jlpm link ..\lumino --all
 jlpm && jlpm build
-pip install -ve .
 ```
