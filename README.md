@@ -1,4 +1,8 @@
 ```
+git clone --recursive https://github.com/hp2oo1/myJupyterLab.git
+```
+
+```
 conda install -c conda-forge nodejs yarn
 ```
 
