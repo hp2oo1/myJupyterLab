@@ -20,11 +20,13 @@ yarn && yarn build
 ```
 git clone https://github.com/hp2oo1/jupyterlab.git
 cd jupyterlab
+yarn link ..\lumino
 pip install -ve ".[dev]"
 ```
 
 ```
 cd ipydatagrid
+yarn link ..\lumino
 pip install -ve .
 ```
 
