@@ -1,40 +1,35 @@
+### MyJupyterLab
 ```
-git clone --recursive https://github.com/hp2oo1/myJupyterLab.git
-```
-
-```
+git clone --recursive https://github.com/hp2oo1/my
 cd myJupyterLab
-conda install -c conda-forge jupyterlab nodejs
+conda install -c conda-forge nodejs
 ```
 
+### Install Development Version
+```
+git clone https://github.com/hp2oo1/jupyterlab.git
+cd jupyterlab
+pip install -e ".[dev]"
+```
+
+### Build Lumino
 ```
 cd lumino
 jlpm && jlpm build
 ```
 
-```
-pip install hatchling
-```
-
+### Build JupyterLab
 ```
 cd jupyterlab
 jlpm link ..\lumino --all
 jlpm && jlpm run build
-pip install -ve .
+jupyter lab build
 ```
 
-```
-cd jupyterlab
-juypter lab build
-```
-
+### Build ipydatagrid
 ```
 cd ipydatagrid
 jlpm link ..\lumino --all
 jlpm && jlpm build
 pip install -ve .
-```
-
-```
-pip install jupytext
 ```
