@@ -30,10 +30,6 @@ yarn link ..\lumino
 pip install -ve .
 ```
 
-```
-mklink /J ..\.conda\share\jupyter\lab\staging\node_modules\@lumino ..\lumino\packages
-```
-
 ### Rebuild JupyterLab
 ```
 cd jupyterlab
@@ -45,4 +41,11 @@ jupyter lab build
 ```
 cd ipydatagrid
 jlpm && jlpm build
+```
+
+### Before Launch JupyterLab
+```
+cd myJupyterLab
+rm -rf .conda\share\jupyter\lab\staging\node_modules\@lumino
+mklink /J .conda\share\jupyter\lab\staging\node_modules\@lumino lumino\packages
 ```
