@@ -19,6 +19,9 @@ jlpm && jlpm build
 ### Install Development Version
 ```
 git clone https://github.com/hp2oo1/jupyterlab.git
+```
+
+```
 cd jupyterlab
 jlpm link ..\lumino --all
 pip install -ve ".[dev]"
