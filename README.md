@@ -7,7 +7,7 @@ Create and activate conda environment
 
 ```
 cd myJupyterLab
-conda install -c conda-forge nodejs=20
+conda install -c conda-forge nodejs=20 -y
 ```
 
 ### Install Development Version
