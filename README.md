@@ -26,7 +26,7 @@ pip install -ve ".[dev]"
 
 ```
 cd ipydatagrid
-yarn link ..\lumino
+jlpm link ..\lumino
 pip install -ve .
 ```
 
