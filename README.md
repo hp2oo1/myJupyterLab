@@ -18,11 +18,11 @@ cd lumino
 jlpm && jlpm build
 ```
 
-### Build JupyterLab
+### Rebuild JupyterLab
 ```
 cd jupyterlab
 jlpm link ..\lumino --all
-jlpm && jlpm run build
+jlpm && jlpm build
 jupyter lab build
 ```
 
