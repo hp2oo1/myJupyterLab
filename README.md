@@ -43,9 +43,13 @@ cd ipydatagrid
 jlpm && jlpm build
 ```
 
-### Before Launch JupyterLab
+### Launch JupyterLab
 ```
 cd myJupyterLab
 rm -rf .conda\share\jupyter\lab\staging\node_modules\@lumino
 mklink /J .conda\share\jupyter\lab\staging\node_modules\@lumino lumino\packages
+```
+
+```
+jupyter lab
 ```
