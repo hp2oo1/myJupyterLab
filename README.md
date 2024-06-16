@@ -7,13 +7,13 @@ Create and activate conda environment
 
 ```
 cd myJupyterLab
-conda install -c conda-forge nodejs=20 yarn -y
+conda install -c conda-forge jupyterlab nodejs=20 -y
 ```
 
 ### Build Lumino (modified)
 ```
 cd lumino
-yarn && yarn build
+jlpm && jlpm build
 ```
 
 ### Install Development Version
