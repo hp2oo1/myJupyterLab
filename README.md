@@ -10,7 +10,7 @@ cd myJupyterLab
 conda install -c conda-forge nodejs=20 yarn -y
 ```
 
-### Build Lumino
+### Build Lumino (modified)
 ```
 cd lumino
 yarn && yarn build
@@ -40,7 +40,7 @@ jupyter lab build
 mklink /J ..\.conda\share\jupyter\lab\staging\node_modules\@lumino ..\lumino\packages
 ```
 
-### ReBuild ipydatagrid
+### ReBuild ipydatagrid (modified)
 ```
 cd ipydatagrid
 jlpm link ..\lumino --all
