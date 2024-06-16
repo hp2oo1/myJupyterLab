@@ -25,3 +25,7 @@ jlpm link ..\lumino --all
 jlpm && jlpm build
 pip install -ve .
 ```
+
+```
+pip install jupytext
+```
