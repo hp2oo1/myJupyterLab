@@ -3,18 +3,23 @@ git clone --recursive https://github.com/hp2oo1/myJupyterLab.git
 ```
 
 ```
-conda install -c conda-forge nodejs yarn
+cd myJupyterLab
+conda install -c conda-forge jupyterlab nodejs
 ```
 
 ```
 cd lumino
-yarn && yarn build
+jlpm && jlpm build
+```
+
+```
+pip install hatchling
 ```
 
 ```
 cd jupyterlab
-yarn link ..\lumino --all
-yarn && yarn build
+jlpm link ..\lumino --all
+jlpm && jlpm run build
 pip install -ve .
 ```
 
