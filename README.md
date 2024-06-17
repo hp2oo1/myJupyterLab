@@ -45,19 +45,12 @@ cd ipydatagrid
 jlpm && jlpm build
 ```
 
-### Before Launch JupyterLab
+### Build JupyterLab App
 ```
 cd jupyterLab
-jupyter lab build --app-dir .
-```
-
-Delete staging\node_modules\@lumino
-
-```
-mklink /J staging\node_modules\@lumino ..\lumino\packages
-```
-
-```
+jupyter lab clean --app-dir .
+mkdir /p staging
+mklink /j staging\node_modules node_modules
 jupyter lab build --app-dir .
 ```
 
