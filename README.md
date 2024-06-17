@@ -47,7 +47,7 @@ jlpm && jlpm build
 
 ### Build JupyterLab App
 ```
-cd jupyterLab
+cd jupyterlab
 jupyter lab clean --app-dir .
 mkdir /p staging
 mklink /j staging\node_modules node_modules
@@ -56,5 +56,6 @@ jupyter lab build --app-dir .
 
 ### Launch JupyterLab
 ```
+cd jupyterlab
 jupyter lab --app-dir .
 ```
