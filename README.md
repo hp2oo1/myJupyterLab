@@ -49,7 +49,7 @@ jlpm && jlpm build
 ```
 cd jupyterlab
 jupyter lab clean --app-dir .
-mkdir /p staging
+mkdir staging
 mklink /j staging\node_modules node_modules
 jupyter lab build --app-dir .
 ```
