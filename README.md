@@ -24,25 +24,15 @@ git clone https://github.com/hp2oo1/jupyterlab.git
 ```
 cd jupyterlab
 jlpm link ..\lumino --all
+jlpm && jlpm build
 pip install -ve ".[dev]"
 ```
 
 ```
 cd ipydatagrid
 jlpm link ..\lumino --all
+jlpm && jlpm build
 pip install -ve .
-```
-
-### ReBuild JupyterLab
-```
-cd jupyterlab
-jlpm && jlpm build
-```
-
-### ReBuild ipydatagrid (modified)
-```
-cd ipydatagrid
-jlpm && jlpm build
 ```
 
 ### Build JupyterLab App
