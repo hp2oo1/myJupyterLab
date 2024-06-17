@@ -44,8 +44,8 @@ jupyter lab build --app-dir .
 
 ### Launch JupyterLab App
 ```
-cd jupyterlab
-jupyter lab --app-dir .
+cd myTable
+jupyter lab --app-dir ..\jupyterlab
 ```
 
 ### ReBuild ipydatagrid (modified)
