@@ -38,10 +38,10 @@ pip install -ve .
 ### Build JupyterLab App
 ```
 cd jupyterlab
-jupyter lab clean --app-dir .
+jupyter lab clean --app-dir ..\app
 mkdir staging
 mklink /j staging\node_modules node_modules
-jupyter lab build --app-dir .
+jupyter lab build --app-dir ..\app
 ```
 
 ### Launch JupyterLab App
