@@ -37,7 +37,6 @@ pip install -ve .
 ```
 cd jupyterlab
 jlpm && jlpm build
-jupyter lab build
 ```
 
 ### ReBuild ipydatagrid (modified)
