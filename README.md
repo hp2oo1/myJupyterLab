@@ -16,7 +16,7 @@ cd lumino
 jlpm && jlpm build
 ```
 
-### Install Development Version
+### Build/Install Development Version
 ```
 cd ipydatagrid
 jlpm link ..\lumino --all
