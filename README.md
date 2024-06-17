@@ -45,6 +45,7 @@ jupyter lab build --app-dir ..\app
 Delete ..\app\staging\node_modules\@lumino
 ```
 mklink /j ..\app\staging\node_modules\@lumino ..\lumino\packages
+jupyter lab build --app-dir ..\app
 ```
 
 ### Launch JupyterLab App
