@@ -51,5 +51,5 @@ pip install jupytext
 
 ```
 cd myTable
-jupyter lab --app-dir ..\jupyterlab
+jupyter lab --app-dir ..\app
 ```
