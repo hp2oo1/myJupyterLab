@@ -39,8 +39,8 @@ pip install -ve .
 ```
 cd jupyterlab
 jupyter lab clean --app-dir ..\app
-mkdir staging
-mklink /j staging\node_modules node_modules
+mkdir ..\app\staging
+mklink /j ..\app\staging\node_modules node_modules
 jupyter lab build --app-dir ..\app
 ```
 
