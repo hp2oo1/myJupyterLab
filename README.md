@@ -7,58 +7,53 @@ Create and activate conda environment
 
 ```
 cd myJupyterLab
-conda install -c conda-forge nodejs=20 yarn -y
+conda install -c conda-forge jupyterlab nodejs=20 -y
 ```
 
 ### Build Lumino (modified)
 ```
 cd lumino
-yarn && yarn build
+jlpm && jlpm build
 ```
 
 ### Install Development Version
 ```
 git clone https://github.com/hp2oo1/jupyterlab.git
+```
+
+```
 cd jupyterlab
-yarn link ..\lumino
+jlpm link ..\lumino --all
+jlpm && jlpm build
 pip install -ve ".[dev]"
 ```
 
 ```
 cd ipydatagrid
-jlpm link ..\lumino
+jlpm link ..\lumino --all
+jlpm && jlpm build
 pip install -ve .
 ```
 
-### Rebuild JupyterLab
+### Build JupyterLab App
 ```
 cd jupyterlab
-jlpm && jlpm build
-jupyter lab build
+jupyter lab clean --app-dir ..\app
+jupyter lab build --app-dir ..\app
 ```
 
-### ReBuild ipydatagrid (modified)
+Delete ..\app\staging\node_modules\@lumino
 ```
-cd ipydatagrid
-jlpm && jlpm build
-```
-
-### Before Launch JupyterLab
-```
-cd jupyterLab
-jupyter lab build
+mklink /j ..\app\staging\node_modules\@lumino ..\lumino\packages
+jupyter lab build --app-dir ..\app
 ```
 
+### Launch JupyterLab App
 ```
-rm -rf ..\.conda\share\jupyter\lab\staging\node_modules\@lumino
-mklink /J ..\.conda\share\jupyter\lab\staging\node_modules\@lumino ..\lumino\packages
+pip install jupytext
 ```
 
 ```
-jupyter lab build
-```
-
-### Launch JupyterLab
-```
-jupyter lab
+cd myTable
+jupyter lab --app-dir ..\app
 ```
