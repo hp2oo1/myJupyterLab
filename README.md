@@ -48,19 +48,19 @@ jlpm && jlpm build
 ### Before Launch JupyterLab
 ```
 cd jupyterLab
-jupyter lab build
+jupyter lab build --app-dir .
 ```
 
 ```
-rm -rf ..\.conda\share\jupyter\lab\staging\node_modules\@lumino
-mklink /J ..\.conda\share\jupyter\lab\staging\node_modules\@lumino ..\lumino\packages
+rm -rf staging\node_modules\@lumino
+mklink /J staging\node_modules\@lumino ..\lumino\packages
 ```
 
 ```
-jupyter lab build
+jupyter lab build --app-dir .
 ```
 
 ### Launch JupyterLab
 ```
-jupyter lab
+jupyter lab --app-dir .
 ```
