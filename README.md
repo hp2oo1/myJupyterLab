@@ -51,8 +51,9 @@ cd jupyterLab
 jupyter lab build --app-dir .
 ```
 
+Delete staging\node_modules\@lumino
+
 ```
-rm -rf staging\node_modules\@lumino
 mklink /J staging\node_modules\@lumino ..\lumino\packages
 ```
 
