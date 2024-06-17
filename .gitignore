@@ -1,3 +1,5 @@
+app
+jupyterlab
 *.swp
 __pycache__
 .ipynb_checkpoints
