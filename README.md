@@ -48,12 +48,6 @@ cd jupyterlab
 jupyter lab --app-dir .
 ```
 
-### Rebuild JupyterLab
-```
-cd jupyterlab
-jlpm && jlpm build
-```
-
 ### ReBuild ipydatagrid (modified)
 ```
 cd ipydatagrid
