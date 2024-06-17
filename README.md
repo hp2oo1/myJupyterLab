@@ -44,6 +44,10 @@ jupyter lab build --app-dir .
 
 ### Launch JupyterLab App
 ```
+pip install jupytext
+```
+
+```
 cd myTable
 jupyter lab --app-dir ..\jupyterlab
 ```
