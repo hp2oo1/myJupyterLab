@@ -42,6 +42,11 @@ jupyter lab clean --app-dir ..\app
 jupyter lab build --app-dir ..\app
 ```
 
+Delete ..\app\staging\node_modules\@lumino
+```
+mklink /j ..\app\staging\node_modules\@lumino ..\lumino
+```
+
 ### Launch JupyterLab App
 ```
 pip install jupytext
