@@ -42,7 +42,7 @@ mklink /j staging\node_modules node_modules
 jupyter lab build --app-dir .
 ```
 
-### Launch JupyterLab
+### Launch JupyterLab App
 ```
 cd jupyterlab
 jupyter lab --app-dir .
