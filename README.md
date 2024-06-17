@@ -33,6 +33,18 @@ jlpm link ..\lumino --all
 pip install -ve .
 ```
 
+### ReBuild JupyterLab
+```
+cd jupyterlab
+jlpm && jlpm build
+```
+
+### ReBuild ipydatagrid (modified)
+```
+cd ipydatagrid
+jlpm && jlpm build
+```
+
 ### Build JupyterLab App
 ```
 cd jupyterlab
@@ -50,10 +62,4 @@ pip install jupytext
 ```
 cd myTable
 jupyter lab --app-dir ..\jupyterlab
-```
-
-### ReBuild ipydatagrid (modified)
-```
-cd ipydatagrid
-jlpm && jlpm build
 ```
