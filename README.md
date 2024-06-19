@@ -19,7 +19,6 @@ pip install jupytext clipboard
 ### Build/Install Development Version
 ```
 cd ipydatagrid
-jlpm link ..\lumino --all
 jlpm && jlpm build
 pip install -ve .
 ```
