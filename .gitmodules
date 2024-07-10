@@ -4,3 +4,9 @@
 [submodule "myTable"]
 	path = myTable
 	url = https://github.com/hp2oo1/myTable.git
+[submodule "jupyterlab"]
+	path = jupyterlab
+	url = https://github.com/hp2oo1/jupyterlab.git
+[submodule "lumino"]
+	path = lumino
+	url = https://github.com/hp2oo1/lumino.git
